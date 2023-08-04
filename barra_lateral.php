@@ -16,19 +16,19 @@ $mostrar=mysqli_fetch_array($buscandousu);
 
 <html>
 <head>
-<title>referenciasupem</title>
+<title>Referencias UPEM</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style.css">
 </head>
 <link rel="stylesheet" href="style.css">
 <body>
-
 <div class="BarraLateral">
+<img class="upem" src="img/upem.png" alt="MDN" />
 
 <ul>
-<li><a href="#" >• referencia</a></li>
-<li><a href="tabla_referencias.php" >• tabla de datos</a></li>
-<li><a href="cerrar_sesion.php" >• Cerrar sesión</a></li>
+<li><h3 class="text-center">Referencias</h3></li>
+<li><a href="tabla_referencias.php" >Tabla de datos</a></li>
+<li><a href="cerrar_sesion.php" >Cerrar sesión<span ></a></li>
 </ul>
 <hr>
 </div>

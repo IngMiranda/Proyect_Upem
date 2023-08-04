@@ -29,8 +29,8 @@ INNER JOIN beca f ON a.fk_beca=f.id_beca where id_matricula=$id_matricula");
 -->
     <link rel="stylesheet" href="style.css">
 </head>
-
-<table>
+<div class="imp-ref">
+    <h2 class="text-center bold">Referencia de Pago </h2>
     <table>
         <?php
         while ($mostrar = $sql->fetch_object()) { ?>
@@ -47,7 +47,7 @@ INNER JOIN beca f ON a.fk_beca=f.id_beca where id_matricula=$id_matricula");
                 <input type="text" class="form-control" name="tipo" value="<?= $mostrar->apellido_materno ?>" disabled>
             </div>
             <div class="mb-3">
-                <label for="example_modelo" class="form-label">MAESRIA/LICENCIATURA</label>
+                <label for="example_modelo" class="form-label">Maestría/LICENCIATURA</label>
                 <input type="text" class="form-control" name="modelo" value="<?= $mostrar->nombre_carrera ?>" disabled>
             </div>
             <div class="mb-3">
@@ -61,32 +61,26 @@ INNER JOIN beca f ON a.fk_beca=f.id_beca where id_matricula=$id_matricula");
 
             <div class="mb-3">
                 <label for="Inputclave_concepto" class="form-label">CLAVE DE CONCEPTO</label>
-                <select name="concepto">
+                <select id="concepto" name="concepto" class="form-label w-20">
                     <option value="0" required>seleccione</option>
                     <?php
                     $fk_clave_concepto = "SELECT * FROM concepto_pago";
                     $result = mysqli_query($conn, $fk_clave_concepto);
 
                     while ($valor = mysqli_fetch_array($result)) {
-                        echo '<option value="' . $valor['id_clave_concepto'] . '">' . $valor['id_clave_concepto'] . $valor['concepto'] . $valor['p_v'] . '</option>';
+                        echo '<option value="' . $valor['id_clave_concepto'] . '">'. $valor['id_clave_concepto'] ." ". $valor['concepto'] ." $". $valor['p_v'] . '</option>';
                     }
                     ?>
                 </select>
             </div>
-            <!-- <div class="mb-3">
-            <label for="example_motor" class="form-label">cantidad  </label>
-                /*
-            while ($mostrarpv = $mostrar->fetch_object()) {
-                echo '<input type="text" class="form-control" name="motor" value="$mostrarpv->p_v" disabled>';
-            }*/
-            
-            </div> -->
-            <button type="button" onclick="javascript:window.print()">&#x1f5a8;&#xfe0f Imprimir</button>
-            <a href="index.php" class="btn btn-primary btn-lg active" role="button">inicios</a>
+            <div class="text-center">
+                <button class="btn-general" type="button" onclick="javascript:window.print()">&#x1f5a8;&#xfe0f Imprimir</button>
+                <a href="index.php" class="btn-general px-40 p-14 " role="button">Regresar</a>
+            </div>
 
         <?php
         }
 
         ?>
     </table>
-</table>
+    </div>

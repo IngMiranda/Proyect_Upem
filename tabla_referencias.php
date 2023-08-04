@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>referenciasupem</title>
+    <title>Referencias UPEM</title>
     <link rel="stylesheat" href="//cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
 
 </head>
@@ -12,12 +12,6 @@ include("barra_lateral.php");
 
 ?>
 <?php
-/* 
-SELECT * FROM vehiculos a 
-INNER JOIN categoria b ON a.fk_categoria = b.id_categoria 
-INNER JOIN tipo_vehiculos c ON b.fk_tipo_vehiculo=c.id_tipo_vehiculo 
-INNER JOIN marca d ON a.fk_marca=d.id_marca ORDER BY id_vehiculos
-*/
 $sqlusu=" SELECT * FROM usuario a 
             INNER JOIN contacto b ON a.fk_contacto = b.id_contacto 
             INNER JOIN plantel c ON a.fk_plantel=c.id_plantel 
@@ -43,26 +37,17 @@ $result = mysqli_query($conn,$sqlusu);
       
       <thead>          
         <tr>
-        <th scope="col">matricula</th>
+        <th scope="col">Matricula</th>
           <th scope="col">Nombre</th>
-          <th scope="col">apellido_paterno</th>
-          <th scope="col">apellido_materno</th>
-          <th scope="col">contacto</th>
-          <th scope="col">plantel</th>
-          <th scope="col">carrera</th>
-          <th scope="col">beca</th>
-          <th scope="col">acccion</th>							
+          <th scope="col">Apellido paterno</th>
+          <th scope="col">Apellido materno</th>
+          <th scope="col">Contacto</th>
+          <th scope="col">Plantel</th>
+          <th scope="col">Carrera</th>
+          <th scope="col">Beca</th>
+          <th scope="col">Acciòn</th>							
         </tr>
-      </thead>
-     <!--   <form>
-  <div style="float:right;">
-	<?php //echo "<a class='BotonesTeam5' href=\"tabla_registro_vehiculos.php?\">Agregar producto</a>";?>
-	</div>
-  </form>
--->
-       
-
-      
+      </thead> 
       <tbody>
       <?php
     while($sqlusu=mysqli_fetch_array($result)){
@@ -77,15 +62,7 @@ $result = mysqli_query($conn,$sqlusu);
           <td><?php echo $sqlusu['nom_plantel'] ?></td>
           <td><?php echo $sqlusu['nombre_carrera'] ?></td>
           <td><?php echo $sqlusu['porcentaje_beca'] ?></td>
-
-          <!--
-          <td><?php /*echo $sqlusu['nombre'] ?></td>
-          <td><?php echo $sqlusu['pass'] ?></td>
-          <td><?php echo $sqlusu['correo'] */?></td>
-          -->
           <td>
-          							
-          
           <a href="referencia.php ?id_matricula=<?=$sqlusu['id_matricula'] ?>"referencia >&#128462 referencia</a>
 
           </td>
