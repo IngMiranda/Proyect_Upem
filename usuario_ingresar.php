@@ -13,7 +13,7 @@ $_SESSION['usuarioingresando']=$correo;
 
 header("Location: tabla_referencias.php");
 }
-else if ($nr == 0) 
+else if ($nr == 0) //hola
 {
 echo "<script> alert(' no existen las credenciales');window.location= 'index.php' </script>";
 }
