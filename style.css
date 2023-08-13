@@ -15,10 +15,12 @@ color:black;
 	/*Login*/
 .FormCajaLogin
 {
+ overflow: hidden;
 width: 100%;
 height: 100%;
 display: grid;
-background: url(fondo.jpg) no-repeat center center fixed; 
+background: linear-gradient(to top, #F2F2F2 0%, #1F395E 100%);
+/*background: url(fondo.jpg) no-repeat center center fixed; */
 
 }
 .grupo-entradas{
@@ -36,13 +38,19 @@ border-radius: 6px;
 color:#000;
 border:0.1em solid black;
 width: 400px;
-height: 600px;
+height: 575px;
 position: relative;
 padding: 2px;
 overflow: hidden;  
 
 }
 
+.div-reg{
+
+height: 400px;
+    overflow-y: scroll;
+    width: 350px;
+}
 .TextoCajas
 {
 
@@ -61,7 +69,12 @@ border-radius:5px;
 border:1px solid black;
 color:black;
 }
-
+.CajaSelect{
+    width: 50% !important;
+}
+.mt-15{
+    margin-top: 15px;
+}
 .BtnRegistrar
 {
 width: 80%;
@@ -79,6 +92,12 @@ margin-bottom:5%;
 margin-top:7%;
 }
 
+.BtnRegistrar:hover{
+color: rgb(19, 116, 19);
+background-color: #ffffff;
+border:1px solid  rgb(19, 116, 19);
+}
+
 .BtnLogin
 {
 width: 80%;
@@ -90,11 +109,16 @@ border-radius: 10px;
 border:1px solid black;
 font-size:18px;
 color:white;
-background-color: #1B68DF;
+background-color: #1F395E;
 font-weight: bold;
 margin-top:7%;
 margin-bottom:5%;
 }
+.BtnLogin:hover, .btn-general:hover {
+    color:#122847;
+    background-color: #ffffff;
+    border:1px solid #122847;
+  }
 
 .botondeintercambiar{
 width: 240px;
@@ -125,7 +149,7 @@ border-radius: 30px;
 }
 
 #frmlogin{
-	bottom:10%;
+	bottom:2%;
     left: 50px;
 }
 #frmregistrar{
@@ -171,7 +195,39 @@ padding: 20px;
 box-sizing: border-box;
 text-align:center;
 }
-		
+.upem {
+    height: auto;
+    width: inherit;
+}	
+.text-center{
+    text-align: center;
+}	
+.imp-ref{
+    padding: 25px;
+}
+.w_20{
+    width: 25%;
+}
+.btn-general{
+    margin-right: 20px;
+    width: 180px;
+    text-decoration:none;
+    padding: 10px 30px;
+    cursor: pointer;
+    border-radius: 10px;
+    border:1px solid black;
+    font-size:18px;
+    color:white;
+    background-color: #1F395E;
+    font-weight: bold;
+
+}
+.p-14 {
+    padding: 14px;
+}
+.px-40 {
+    padding-inline: 40px;
+}
 @media (max-width: 768px) 
 	{
 .BarraLateral 
@@ -194,7 +250,7 @@ border-collapse: collapse;
 width: 80%; 
 margin: 0 auto;
 border: 1px solid rgb(47, 9, 134);
-  margin-left: 15%;
+  margin-left: 17%;
   margin-right: 85%;
   margin-bottom: 5%;
 background-color: #d0d8d0;
