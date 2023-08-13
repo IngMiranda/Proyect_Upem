@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2023 a las 20:54:17
+-- Tiempo de generación: 07-08-2023 a las 19:24:36
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.0.25
 
@@ -99,16 +99,18 @@ CREATE TABLE `contacto` (
   `correo` varchar(30) NOT NULL,
   `numero_celular` varchar(10) NOT NULL,
   `numero_telefono` varchar(12) NOT NULL,
-  `contraseña` varchar(45) NOT NULL
+  `contraseña` varchar(45) NOT NULL,
+  `fk_plantel` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `contacto`
 --
 
-INSERT INTO `contacto` (`id_contacto`, `correo`, `numero_celular`, `numero_telefono`, `contraseña`) VALUES
-(1, 'ricardo@gmail.com', '74747487', '34489329838', '12334'),
-(2, 'luisqgmail.com', '18273782', '83289328932', '23456');
+INSERT INTO `contacto` (`id_contacto`, `correo`, `numero_celular`, `numero_telefono`, `contraseña`, `fk_plantel`) VALUES
+(1, 'ricardo@gmail.com', '74747487', '34489329838', '12334', 2),
+(2, 'luis@gmail.com', '18273782', '83289328932', '23456', 1),
+(5, 'lu@gmail.com', '23434345', '85984598994', '21221', 2);
 
 -- --------------------------------------------------------
 
@@ -195,7 +197,6 @@ CREATE TABLE `usuario` (
   `apellido_paterno` varchar(25) NOT NULL,
   `apellido_materno` varchar(25) NOT NULL,
   `fk_contacto` int(12) NOT NULL,
-  `fk_plantel` int(12) NOT NULL,
   `fk_carrera` int(12) NOT NULL,
   `fk_modalidad` int(12) NOT NULL,
   `fk_beca` int(12) NOT NULL
@@ -205,9 +206,9 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_matricula`, `Nom_usuario`, `apellido_paterno`, `apellido_materno`, `fk_contacto`, `fk_plantel`, `fk_carrera`, `fk_modalidad`, `fk_beca`) VALUES
-(1, 'ricardo', 'nuñes', 'juares', 1, 2, 2, 2, 4),
-(2, 'luis', 'll', 'll', 2, 2, 2, 2, 2);
+INSERT INTO `usuario` (`id_matricula`, `Nom_usuario`, `apellido_paterno`, `apellido_materno`, `fk_contacto`, `fk_carrera`, `fk_modalidad`, `fk_beca`) VALUES
+(1, 'ricardo', 'nuñes', 'juares', 1, 2, 2, 4),
+(2, 'luis', 'll', 'll', 2, 2, 2, 2);
 
 --
 -- Índices para tablas volcadas
@@ -235,7 +236,8 @@ ALTER TABLE `concepto_pago`
 -- Indices de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  ADD PRIMARY KEY (`id_contacto`);
+  ADD PRIMARY KEY (`id_contacto`),
+  ADD KEY `fk_plantel_y` (`fk_plantel`);
 
 --
 -- Indices de la tabla `direccion`
@@ -267,7 +269,6 @@ ALTER TABLE `plantel`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_matricula`),
   ADD KEY `fk_contacto` (`fk_contacto`),
-  ADD KEY `fk_plantel` (`fk_plantel`),
   ADD KEY `fk_carrera` (`fk_carrera`),
   ADD KEY `fk_modalidad` (`fk_modalidad`),
   ADD KEY `fk_beca` (`fk_beca`);
@@ -298,7 +299,7 @@ ALTER TABLE `concepto_pago`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id_contacto` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_contacto` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion`
@@ -328,11 +329,17 @@ ALTER TABLE `plantel`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_matricula` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_matricula` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  ADD CONSTRAINT `fk_plantel_y` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`);
 
 --
 -- Filtros para la tabla `usuario`
@@ -341,8 +348,7 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `fk_beca_u` FOREIGN KEY (`fk_beca`) REFERENCES `beca` (`id_beca`),
   ADD CONSTRAINT `fk_carrera_u` FOREIGN KEY (`fk_carrera`) REFERENCES `carrera` (`id_carrera`),
   ADD CONSTRAINT `fk_contacto_u` FOREIGN KEY (`fk_contacto`) REFERENCES `contacto` (`id_contacto`),
-  ADD CONSTRAINT `fk_modalidad_u` FOREIGN KEY (`fk_modalidad`) REFERENCES `modalidad` (`id_modalidad`),
-  ADD CONSTRAINT `fk_plantel_u` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`);
+  ADD CONSTRAINT `fk_modalidad_u` FOREIGN KEY (`fk_modalidad`) REFERENCES `modalidad` (`id_modalidad`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
