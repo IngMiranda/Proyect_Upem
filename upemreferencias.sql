@@ -1,36 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2023 a las 20:54:17
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.0.25
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `upemreferencias`
---
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `beca`
 --
 
 CREATE TABLE `beca` (
   `id_beca` int(10) NOT NULL,
   `porcentaje_beca` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `beca`
@@ -54,7 +29,7 @@ CREATE TABLE `carrera` (
   `id_carrera` int(30) NOT NULL,
   `nombre_carrera` varchar(40) NOT NULL,
   `costo_carrera` varchar(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `carrera`
@@ -75,7 +50,7 @@ CREATE TABLE `concepto_pago` (
   `id_clave_concepto` int(12) NOT NULL,
   `concepto` varchar(20) NOT NULL,
   `p_v` varchar(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `concepto_pago`
@@ -99,16 +74,17 @@ CREATE TABLE `contacto` (
   `correo` varchar(30) NOT NULL,
   `numero_celular` varchar(10) NOT NULL,
   `numero_telefono` varchar(12) NOT NULL,
-  `contraseña` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `contraseña` varchar(45) NOT NULL,
+  `fk_plantel` int(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `contacto`
 --
 
-INSERT INTO `contacto` (`id_contacto`, `correo`, `numero_celular`, `numero_telefono`, `contraseña`) VALUES
-(1, 'ricardo@gmail.com', '74747487', '34489329838', '12334'),
-(2, 'luisqgmail.com', '18273782', '83289328932', '23456');
+INSERT INTO `contacto` (`id_contacto`, `correo`, `numero_celular`, `numero_telefono`, `contraseña`, `fk_plantel`) VALUES
+(1, 'ricardo@gmail.com', '74747487', '34489329838', '12334', 2),
+(2, 'luisqgmail.com', '18273782', '83289328932', '23456', 1);
 
 -- --------------------------------------------------------
 
@@ -124,7 +100,7 @@ CREATE TABLE `direccion` (
   `manzana` varchar(8) DEFAULT NULL,
   `lote` varchar(8) DEFAULT NULL,
   `casa` varchar(15) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `direccion`
@@ -142,7 +118,7 @@ INSERT INTO `direccion` (`id_direccion`, `calle`, `colonia`, `municipio`, `manza
 CREATE TABLE `grado` (
   `id_grado` int(30) NOT NULL,
   `grado` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -153,7 +129,7 @@ CREATE TABLE `grado` (
 CREATE TABLE `modalidad` (
   `id_modalidad` int(12) NOT NULL,
   `tipo_modalidad` varchar(25) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `modalidad`
@@ -173,7 +149,7 @@ INSERT INTO `modalidad` (`id_modalidad`, `tipo_modalidad`) VALUES
 CREATE TABLE `plantel` (
   `id_plantel` int(6) NOT NULL,
   `nom_plantel` varchar(70) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `plantel`
@@ -199,7 +175,7 @@ CREATE TABLE `usuario` (
   `fk_carrera` int(12) NOT NULL,
   `fk_modalidad` int(12) NOT NULL,
   `fk_beca` int(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -207,7 +183,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_matricula`, `Nom_usuario`, `apellido_paterno`, `apellido_materno`, `fk_contacto`, `fk_plantel`, `fk_carrera`, `fk_modalidad`, `fk_beca`) VALUES
 (1, 'ricardo', 'nuñes', 'juares', 1, 2, 2, 2, 4),
-(2, 'luis', 'll', 'll', 2, 2, 2, 2, 2);
+(2, 'luis', 'll', 'll', 2, 1, 2, 2, 2);
 
 --
 -- Índices para tablas volcadas
@@ -235,7 +211,8 @@ ALTER TABLE `concepto_pago`
 -- Indices de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  ADD PRIMARY KEY (`id_contacto`);
+  ADD PRIMARY KEY (`id_contacto`),
+  ADD KEY `fk_plantel_y` (`fk_plantel`);
 
 --
 -- Indices de la tabla `direccion`
@@ -333,6 +310,12 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  ADD CONSTRAINT `fk_plantel_y` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`);
 
 --
 -- Filtros para la tabla `usuario`

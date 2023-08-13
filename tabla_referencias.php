@@ -12,12 +12,6 @@ include("barra_lateral.php");
 
 ?>
 <?php
-/* 
-SELECT * FROM vehiculos a 
-INNER JOIN categoria b ON a.fk_categoria = b.id_categoria 
-INNER JOIN tipo_vehiculos c ON b.fk_tipo_vehiculo=c.id_tipo_vehiculo 
-INNER JOIN marca d ON a.fk_marca=d.id_marca ORDER BY id_vehiculos
-*/
 $sqlusu=" SELECT * FROM usuario a 
             INNER JOIN contacto b ON a.fk_contacto = b.id_contacto 
             INNER JOIN plantel c ON a.fk_plantel=c.id_plantel 
@@ -53,16 +47,7 @@ $result = mysqli_query($conn,$sqlusu);
           <th scope="col">beca</th>
           <th scope="col">acccion</th>							
         </tr>
-      </thead>
-     <!--   <form>
-  <div style="float:right;">
-	<?php //echo "<a class='BotonesTeam5' href=\"tabla_registro_vehiculos.php?\">Agregar producto</a>";?>
-	</div>
-  </form>
--->
-       
-
-      
+      </thead> 
       <tbody>
       <?php
     while($sqlusu=mysqli_fetch_array($result)){
@@ -77,15 +62,7 @@ $result = mysqli_query($conn,$sqlusu);
           <td><?php echo $sqlusu['nom_plantel'] ?></td>
           <td><?php echo $sqlusu['nombre_carrera'] ?></td>
           <td><?php echo $sqlusu['porcentaje_beca'] ?></td>
-
-          <!--
-          <td><?php /*echo $sqlusu['nombre'] ?></td>
-          <td><?php echo $sqlusu['pass'] ?></td>
-          <td><?php echo $sqlusu['correo'] */?></td>
-          -->
           <td>
-          							
-          
           <a href="referencia.php ?id_matricula=<?=$sqlusu['id_matricula'] ?>"referencia >&#128462 referencia</a>
 
           </td>

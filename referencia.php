@@ -73,16 +73,8 @@ INNER JOIN beca f ON a.fk_beca=f.id_beca where id_matricula=$id_matricula");
                     ?>
                 </select>
             </div>
-            <!-- <div class="mb-3">
-            <label for="example_motor" class="form-label">cantidad  </label>
-                /*
-            while ($mostrarpv = $mostrar->fetch_object()) {
-                echo '<input type="text" class="form-control" name="motor" value="$mostrarpv->p_v" disabled>';
-            }*/
-            
-            </div> -->
             <button type="button" onclick="javascript:window.print()">&#x1f5a8;&#xfe0f Imprimir</button>
-            <a href="index.php" class="btn btn-primary btn-lg active" role="button">inicios</a>
+            <a href="index.php" class="btn btn-primary btn-lg active" role="button">inicio</a>
 
         <?php
         }
