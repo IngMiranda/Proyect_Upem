@@ -1,4 +1,22 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 25-07-2023 a las 06:08:24
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 8.0.7
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+--
+-- Base de datos: `upemreferencias`
+--
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `beca`
 --
 
@@ -36,9 +54,13 @@ CREATE TABLE `carrera` (
 --
 
 INSERT INTO `carrera` (`id_carrera`, `nombre_carrera`, `costo_carrera`) VALUES
-(1, 'lic derecho', '1850.50'),
-(2, 'lic mercadotecnia', '1990.00'),
-(3, 'ing sistemas computacionales', '1950.00');
+(1, 'Lic Derecho', '1850.50'),
+(2, 'Lic Mercadotecnia', '1990.00'),
+(3, 'Ing Sistemas Computacionales', '1950.00');
+(4, 'Lic Gastronomia', '1950.50'),
+(1, 'Lic Pedagogia', '1850.50'),
+(1, 'Lic Psicologia', '1850.50'),
+(1, 'Lic Ciencias de la Comunicacion', '1950.00'),
 
 -- --------------------------------------------------------
 
@@ -57,11 +79,14 @@ CREATE TABLE `concepto_pago` (
 --
 
 INSERT INTO `concepto_pago` (`id_clave_concepto`, `concepto`, `p_v`) VALUES
-(1, 'mensualidad', ''),
-(2, 'constancia', '250'),
-(3, 'inscripcion', '700'),
-(4, 'seguro', '150'),
-(5, 'credencial', '200');
+(1, 'Mensualidad', ''),
+(2, 'Constancia', '250'),
+(3, 'Inscripcion', '700'),
+(4, 'Seguro', '150'),
+(5, 'Credencial', '200');
+(6, 'Idioma', '220');
+(7, 'Servicio Social', '240');
+(8, 'Constancia no adeudo', '250');
 
 -- --------------------------------------------------------
 
@@ -136,9 +161,9 @@ CREATE TABLE `modalidad` (
 --
 
 INSERT INTO `modalidad` (`id_modalidad`, `tipo_modalidad`) VALUES
-(1, 'sabatina '),
-(2, 'matutina'),
-(3, 'despertina');
+(1, 'Sabatino '),
+(2, 'Matutino'),
+(3, 'Vespertino');
 
 -- --------------------------------------------------------
 
@@ -156,9 +181,11 @@ CREATE TABLE `plantel` (
 --
 
 INSERT INTO `plantel` (`id_plantel`, `nom_plantel`) VALUES
-(1, 'UMPEM TECAMAC'),
+(1, 'UPEM TECAMAC'),
 (2, 'UPEM TEXCOCO');
-
+(3, 'UPEM CENTRO');
+(4, 'UPEM ECATEPEC');
+(5, 'UPEM PIRAMIDES');
 -- --------------------------------------------------------
 
 --
@@ -327,7 +354,3 @@ ALTER TABLE `usuario`
   ADD CONSTRAINT `fk_modalidad_u` FOREIGN KEY (`fk_modalidad`) REFERENCES `modalidad` (`id_modalidad`),
   ADD CONSTRAINT `fk_plantel_u` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
