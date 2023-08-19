@@ -340,7 +340,7 @@ ALTER TABLE `usuario`
 
 --
 -- Filtros para la tabla `contacto`
---
+
 ALTER TABLE `contacto`
   ADD CONSTRAINT `fk_plantel_y` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`);
 
