@@ -1,9 +1,12 @@
 <?php
 include('modelo/conexion.php');
 
+</head>
+<body>
+	<h1>¡Bienvenido Universitario!!</h1>
 $nombre = $_POST["txtnombre1"];
-$apellido_p=$_POST["txtapellido_p"];
-$apellido_m=$_POST["txt_apellido_m"];
+$apellido_p=$_POST["txtapellido_paterno"];
+$apellido_m=$_POST["txt_apellido_materno"];
 $fk_contacto=$_POST["txt_contacto"];
 $fk_plantel=$_POST["txt_plantel"];
 $fk_carrera=$_POST["txt_carrera"];
@@ -19,11 +22,19 @@ $insertarnombre = mysqli_query($conn,"INSERT INTO usuario(`Nom_usuario`, `apelli
 
 if(!$insertarcorreo)
 {
-echo "<script>alert('Correo duplicado, intenta con otro correo');window.location='index.php';</script>";	 
+echo "<script>alert('Correo duplicado, o invalido');window.location='index.php';</script>";	
+
+header("Refresh: 2; URL=admin.php"); // Redirigir al inicio
+echo "Verifica tu informacion. Seras redirigido al inicio.";
+exit(); 
 }
 else
 {
 echo "<script> alert('Usuario registrado con exito: $nombre'); window.location='index.php' </script>";
+
+header("Refresh: 2; URL=admin.php"); // Redirigir al inicio
+echo "Regitro exitoso. Seras redirigido al inicio.";
+exit();
 }
 
 ?>
