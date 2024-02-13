@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2023 a las 20:54:17
+-- Tiempo de generación: 24-01-2024 a las 21:26:14
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.0.25
 
@@ -74,19 +74,20 @@ INSERT INTO `carrera` (`id_carrera`, `nombre_carrera`, `costo_carrera`) VALUES
 CREATE TABLE `concepto_pago` (
   `id_clave_concepto` int(12) NOT NULL,
   `concepto` varchar(20) NOT NULL,
-  `p_v` varchar(9) NOT NULL
+  `p_v` varchar(9) NOT NULL,
+  `fk_carrera_costo` int(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `concepto_pago`
 --
 
-INSERT INTO `concepto_pago` (`id_clave_concepto`, `concepto`, `p_v`) VALUES
-(1, 'mensualidad', ''),
-(2, 'constancia', '250'),
-(3, 'inscripcion', '700'),
-(4, 'seguro', '150'),
-(5, 'credencial', '200');
+INSERT INTO `concepto_pago` (`id_clave_concepto`, `concepto`, `p_v`, `fk_carrera_costo`) VALUES
+(1, 'mensualidad', '', 0),
+(2, 'constancia', '250', 0),
+(3, 'inscripcion', '700', 0),
+(4, 'seguro', '150', 0),
+(5, 'credencial', '200', 0);
 
 -- --------------------------------------------------------
 
@@ -95,20 +96,38 @@ INSERT INTO `concepto_pago` (`id_clave_concepto`, `concepto`, `p_v`) VALUES
 --
 
 CREATE TABLE `contacto` (
-  `id_contacto` int(12) NOT NULL,
+  `id_contacto` int(25) NOT NULL,
   `correo` varchar(30) NOT NULL,
   `numero_celular` varchar(10) NOT NULL,
   `numero_telefono` varchar(12) NOT NULL,
-  `contraseña` varchar(45) NOT NULL
+  `contraseña` varchar(45) NOT NULL,
+  `fk_plantel` int(12) NOT NULL,
+  `fk_rol` int(12) NOT NULL,
+  `fk_usuario` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `contacto`
 --
 
-INSERT INTO `contacto` (`id_contacto`, `correo`, `numero_celular`, `numero_telefono`, `contraseña`) VALUES
-(1, 'ricardo@gmail.com', '74747487', '34489329838', '12334'),
-(2, 'luisqgmail.com', '18273782', '83289328932', '23456');
+INSERT INTO `contacto` (`id_contacto`, `correo`, `numero_celular`, `numero_telefono`, `contraseña`, `fk_plantel`, `fk_rol`, `fk_usuario`) VALUES
+(16, 'luis@gmail.com', '1234567890', '1234567890', '123456', 2, 2, 68),
+(18, 'ricardo@gmail.com', '1234567890', '1234567890', '12334', 2, 1, 67),
+(26, 'angel@gmail.com', '123456789', '1234567890', '12355', 1, 2, 74),
+(27, 'kevin@gmail.com', '1234567890', '2516367839', '12345iuisnd9232930', 1, 1, 75),
+(37, 'prueba@gmail.com', '1234567890', '1234567890', 'iiodfd9ds89dj', 2, 2, 92),
+(39, 'adrian@gmail.com', '1234567890', '1234567890', '1q2w3e4r5t/', 2, 2, 117),
+(40, 'adrian22@gmail.com', '1234567890', '1234567890', '1qa3er4r4654', 2, 2, 118),
+(41, 'carlos44@gmal.com', '1234567890', '1234567890', '1q2w3e4r5t|', 1, 2, 119),
+(42, 'angel@gmail.com', '1234567890', '1234567890', '8i7u6y5tJ$', 1, 2, 120),
+(43, 'angel@gmail.com', '1234567890', '1234567890', '8i7u6y5tJ$', 1, 2, 121),
+(45, 'as@jfjd.cs', '1234567890', '1234567890', '28e8rhf8hf8wuhfbw9', 1, 2, 123),
+(46, 'aslk@gmjd.cjdfj', '1298249902', '9198249210', '189hf8uheef92he92h', 2, 2, 124),
+(47, 'jose@gmail.com', '1092013898', '5569898988', '9ok9isjdiwje293j29', 2, 2, 125),
+(49, 'luis9@gmail.com', '9012948890', '9010291209', '9o98i7u6y5t4r3e356', 2, 2, 127),
+(50, 'qwqw@gadd.com', '9898989821', '6126721667', '8q8wu287ed7w78q78e', 2, 2, 128),
+(52, 'iigigjs@gmail.com', '5637328398', '5611928121', 'ioerierioiorireioo', 2, 2, 130),
+(53, 'ioi@gmil.com', '34567', '123456', '903274578fy8hrfuer', 2, 2, 131);
 
 -- --------------------------------------------------------
 
@@ -147,6 +166,28 @@ CREATE TABLE `grado` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `matricula`
+--
+
+CREATE TABLE `matricula` (
+  `id_matriculas` int(20) NOT NULL,
+  `matricula` bigint(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `matricula`
+--
+
+INSERT INTO `matricula` (`id_matriculas`, `matricula`) VALUES
+(1, 220011012024),
+(2, 220111012024),
+(3, 220211012024),
+(4, 220311012024),
+(5, 220411012024);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `modalidad`
 --
 
@@ -162,7 +203,8 @@ CREATE TABLE `modalidad` (
 INSERT INTO `modalidad` (`id_modalidad`, `tipo_modalidad`) VALUES
 (1, 'sabatina '),
 (2, 'matutina'),
-(3, 'despertina');
+(3, 'despertina'),
+(4, 'escolarizado');
 
 -- --------------------------------------------------------
 
@@ -186,6 +228,25 @@ INSERT INTO `plantel` (`id_plantel`, `nom_plantel`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `id_rol` int(12) NOT NULL,
+  `rol` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`id_rol`, `rol`) VALUES
+(1, 'administrador '),
+(2, 'usuario');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuario`
 --
 
@@ -194,8 +255,6 @@ CREATE TABLE `usuario` (
   `Nom_usuario` varchar(25) NOT NULL,
   `apellido_paterno` varchar(25) NOT NULL,
   `apellido_materno` varchar(25) NOT NULL,
-  `fk_contacto` int(12) NOT NULL,
-  `fk_plantel` int(12) NOT NULL,
   `fk_carrera` int(12) NOT NULL,
   `fk_modalidad` int(12) NOT NULL,
   `fk_beca` int(12) NOT NULL
@@ -205,9 +264,27 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_matricula`, `Nom_usuario`, `apellido_paterno`, `apellido_materno`, `fk_contacto`, `fk_plantel`, `fk_carrera`, `fk_modalidad`, `fk_beca`) VALUES
-(1, 'ricardo', 'nuñes', 'juares', 1, 2, 2, 2, 4),
-(2, 'luis', 'll', 'll', 2, 2, 2, 2, 2);
+INSERT INTO `usuario` (`id_matricula`, `Nom_usuario`, `apellido_paterno`, `apellido_materno`, `fk_carrera`, `fk_modalidad`, `fk_beca`) VALUES
+(67, 'ricardo ', 'nuñes ', 'juares', 2, 4, 2),
+(68, 'luis ', 'luisap ', 'luisam', 2, 3, 4),
+(74, 'angel', 'angelap', 'angelam', 3, 4, 6),
+(75, 'kevin', 'kap', 'kam', 2, 1, 6),
+(92, 'alejandro', 'gomez ', 'gomez', 3, 3, 5),
+(93, 'luis', 'lopez', 'lopez', 3, 1, 6),
+(94, 'carlos', 'ap', 'am', 2, 2, 2),
+(117, 'adrian', 'aap', 'aam', 3, 3, 3),
+(118, 'adrian', 'lopez', 'lopez', 2, 4, 4),
+(119, 'carlos', 'perez', 'perez', 2, 4, 4),
+(120, 'angel', 'anap', 'anam', 1, 4, 5),
+(121, 'angel', 'anap', 'anam', 1, 4, 5),
+(122, 'adrian', 'adrap', 'adram', 3, 3, 5),
+(123, 'holaaa', 'holap', 'holam', 3, 4, 3),
+(124, 'as', 'asap', 'asam', 3, 4, 6),
+(125, 'jose', 'luap', 'luam', 3, 4, 1),
+(127, 'dd', 'dd', 'dd', 3, 4, 4),
+(128, 'ggg', 'ggg', 'gggg', 3, 4, 5),
+(130, 'we', 'we', 'we', 3, 3, 6),
+(131, 'gghola', 'jfjk', 'josam', 1, 1, 2);
 
 --
 -- Índices para tablas volcadas
@@ -229,13 +306,17 @@ ALTER TABLE `carrera`
 -- Indices de la tabla `concepto_pago`
 --
 ALTER TABLE `concepto_pago`
-  ADD PRIMARY KEY (`id_clave_concepto`);
+  ADD PRIMARY KEY (`id_clave_concepto`),
+  ADD KEY `fk_carrera_costo_ca` (`fk_carrera_costo`);
 
 --
 -- Indices de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  ADD PRIMARY KEY (`id_contacto`);
+  ADD PRIMARY KEY (`id_contacto`),
+  ADD KEY `fk_plantel_y` (`fk_plantel`),
+  ADD KEY `fk_rol_r` (`fk_rol`),
+  ADD KEY `fk_usuario` (`fk_usuario`);
 
 --
 -- Indices de la tabla `direccion`
@@ -250,6 +331,12 @@ ALTER TABLE `grado`
   ADD PRIMARY KEY (`id_grado`);
 
 --
+-- Indices de la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  ADD PRIMARY KEY (`id_matriculas`);
+
+--
 -- Indices de la tabla `modalidad`
 --
 ALTER TABLE `modalidad`
@@ -262,12 +349,16 @@ ALTER TABLE `plantel`
   ADD PRIMARY KEY (`id_plantel`);
 
 --
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`id_rol`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_matricula`),
-  ADD KEY `fk_contacto` (`fk_contacto`),
-  ADD KEY `fk_plantel` (`fk_plantel`),
   ADD KEY `fk_carrera` (`fk_carrera`),
   ADD KEY `fk_modalidad` (`fk_modalidad`),
   ADD KEY `fk_beca` (`fk_beca`);
@@ -298,7 +389,7 @@ ALTER TABLE `concepto_pago`
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `id_contacto` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_contacto` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion`
@@ -313,10 +404,16 @@ ALTER TABLE `grado`
   MODIFY `id_grado` int(30) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  MODIFY `id_matriculas` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `modalidad`
 --
 ALTER TABLE `modalidad`
-  MODIFY `id_modalidad` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_modalidad` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `plantel`
@@ -325,14 +422,28 @@ ALTER TABLE `plantel`
   MODIFY `id_plantel` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `rol`
+--
+ALTER TABLE `rol`
+  MODIFY `id_rol` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_matricula` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_matricula` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `contacto`
+--
+ALTER TABLE `contacto`
+  ADD CONSTRAINT `fk_plantel_y` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`),
+  ADD CONSTRAINT `fk_rol_r` FOREIGN KEY (`fk_rol`) REFERENCES `rol` (`id_rol`),
+  ADD CONSTRAINT `fk_usuario_u` FOREIGN KEY (`fk_usuario`) REFERENCES `usuario` (`id_matricula`);
 
 --
 -- Filtros para la tabla `usuario`
@@ -340,9 +451,7 @@ ALTER TABLE `usuario`
 ALTER TABLE `usuario`
   ADD CONSTRAINT `fk_beca_u` FOREIGN KEY (`fk_beca`) REFERENCES `beca` (`id_beca`),
   ADD CONSTRAINT `fk_carrera_u` FOREIGN KEY (`fk_carrera`) REFERENCES `carrera` (`id_carrera`),
-  ADD CONSTRAINT `fk_contacto_u` FOREIGN KEY (`fk_contacto`) REFERENCES `contacto` (`id_contacto`),
-  ADD CONSTRAINT `fk_modalidad_u` FOREIGN KEY (`fk_modalidad`) REFERENCES `modalidad` (`id_modalidad`),
-  ADD CONSTRAINT `fk_plantel_u` FOREIGN KEY (`fk_plantel`) REFERENCES `plantel` (`id_plantel`);
+  ADD CONSTRAINT `fk_modalidad_u` FOREIGN KEY (`fk_modalidad`) REFERENCES `modalidad` (`id_modalidad`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
